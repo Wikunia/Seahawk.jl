@@ -3,6 +3,13 @@ uuid = "7df1d778-eb36-40ee-bcba-283d3c0986e8"
 authors = ["Ole Kröger <o.kroeger@opensourc.es> and contributors"]
 version = "0.1.0"
 
+[deps]
+CodeTracking = "da1fd8a2-8d9e-5ec2-8556-3022fb5608a2"
+DocSeeker = "33d173f1-3be9-53c5-a697-8225b67db89c"
+Markdown = "d6f4376e-aef5-505a-96c1-9c027394607a"
+REPL = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
+ReplMaker = "b873ce64-0db9-51f5-a568-4457d8e49576"
+
 [compat]
 julia = "1"
 
