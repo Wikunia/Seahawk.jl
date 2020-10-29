@@ -1,0 +1,3 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+Seahawk = "7df1d778-eb36-40ee-bcba-283d3c0986e8"
