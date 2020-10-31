@@ -5,13 +5,24 @@ using CodeTracking
 using DocSeeker
 using REPL: doc, meta, stripmd
 using ReplMaker
-using Markdown: MD
+using Markdown: Markdown, MD
 
 const DESCRIPTION_LIMIT = 80
 
-search(string) = search(stdout, string)
-function search(io::IO, needle)
+"""
+    search(string)
+
+Search for `string` in all docstrings for all loaded packages and print the results
+such that the best match is at the bottom.
+If the matches should be returned instead of printed one can use `;silent = true`
+"""
+search(string; silent=false) = search(stdout, string; silent=silent)
+
+function search(io::IO, needle; silent=false)
     search_results = searchdocs(needle)
+    if silent
+        return search_results
+    end
     print_results(search_results)
 end
 
@@ -34,18 +45,18 @@ flat_content(md::MD) = flat_content!(md.content)
 
 function strlimit(str::AbstractString, limit::Integer = 30, ellipsis::AbstractString = "…")
     will_append = length(str) > limit
-  
+
     io = IOBuffer()
     i = 1
     for c in str
       will_append && i > limit - length(ellipsis) && break
       isvalid(c) || continue
-  
+
       print(io, c)
       i += 1
     end
     will_append && print(io, ellipsis)
-  
+
     return String(take!(io))
 end
 
@@ -81,10 +92,10 @@ function print_result(res::DocSeeker.DocObj)
 end
 
 function __init__()
-    initrepl(search, 
+    initrepl(search,
             prompt_text="Seahawk> ",
-            prompt_color = :white, 
-            start_key='/', 
+            prompt_color = :white,
+            start_key='/',
             mode_name="Search mode")
 end
 
